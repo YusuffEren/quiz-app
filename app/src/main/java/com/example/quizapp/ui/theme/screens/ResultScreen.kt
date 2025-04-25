@@ -12,10 +12,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.activity.ComponentActivity
 
 @Composable
 fun ResultScreen(
@@ -34,8 +36,14 @@ fun ResultScreen(
     }
     var isRestartPressed by remember { mutableStateOf(false) }
     var isBackPressed by remember { mutableStateOf(false) }
+    var isExitPressed by remember { mutableStateOf(false) }
     val restartScale by animateFloatAsState(if (isRestartPressed) 0.97f else 1f)
     val backScale by animateFloatAsState(if (isBackPressed) 0.97f else 1f)
+    val exitScale by animateFloatAsState(if (isExitPressed) 0.97f else 1f)
+
+    // Uygulamayı kapatmak için Activity’ye erişim
+    val context = LocalContext.current
+    val activity = context as? ComponentActivity
 
     Column(
         modifier = Modifier
@@ -134,6 +142,26 @@ fun ResultScreen(
         ) {
             Text(
                 text = "Sınav Seçimine Dön",
+                style = MaterialTheme.typography.headlineSmall,
+                fontSize = 18.sp,
+                color = MaterialTheme.colorScheme.primary
+            )
+        }
+        Spacer(modifier = Modifier.height(16.dp))
+        OutlinedButton(
+            onClick = {
+                isExitPressed = true
+                activity?.finish() // Uygulamayı kapat
+                isExitPressed = false
+            },
+            modifier = Modifier
+                .fillMaxWidth(0.85f)
+                .height(64.dp)
+                .scale(exitScale),
+            shape = MaterialTheme.shapes.medium
+        ) {
+            Text(
+                text = "Çıkış Yap",
                 style = MaterialTheme.typography.headlineSmall,
                 fontSize = 18.sp,
                 color = MaterialTheme.colorScheme.primary
