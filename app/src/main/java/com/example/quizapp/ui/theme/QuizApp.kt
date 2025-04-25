@@ -162,16 +162,16 @@ fun QuizApp() {
                         score = score,
                         totalQuestions = quizzes[selectedQuiz]?.size ?: 0,
                         onRestart = {
-                            screenState = "start"
-                            currentQuestionIndex = 0
-                            score = 0
-                            totalQuizTime = 0
+                            // Mevcut sınavı yeniden başlat
+                            screenState = "quiz"
+                            isQuizActive = true
+                            userAnswers = MutableList(quizzes[selectedQuiz]?.size ?: 0) { null }
+                            totalQuizTime = (quizzes[selectedQuiz]?.size ?: 0) * questionTime
                             quizTimeLeft = totalQuizTime
                             questionTimeLeft = questionTime
-                            userAnswers = mutableListOf()
-                            isQuizActive = false
-                            selectedQuiz = null
-                            Log.d("QuizApp", "Restarting app")
+                            currentQuestionIndex = 0
+                            score = 0
+                            Log.d("QuizApp", "Restarting current quiz: $selectedQuiz")
                         },
                         onBackToSelection = {
                             screenState = "selectQuiz"
