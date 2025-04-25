@@ -22,68 +22,68 @@ import androidx.compose.ui.unit.sp
 fun StartScreen(onStart: () -> Unit) {
     var isPressed by remember { mutableStateOf(false) }
     var scale by remember { mutableFloatStateOf(1f) }
-    scale = animateFloatAsState(targetValue = if (isPressed) 0.95f else 1f).value
+    scale = animateFloatAsState(targetValue = if (isPressed) 0.97f else 1f).value
 
-    Column(
+    Box(
         modifier = Modifier
             .fillMaxSize()
             .background(
-                Brush.linearGradient(
-                    colors = listOf(Color(0xFFE8EAF6), Color(0xFFC5CAE9))
+                Brush.verticalGradient(
+                    colors = listOf(Color(0xFF232526), Color(0xFF414345))
                 )
             )
-            .padding(32.dp),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Icon(
-            imageVector = Icons.Filled.Info,
-            contentDescription = "Quiz Icon",
-            modifier = Modifier.size(120.dp),
-            tint = MaterialTheme.colorScheme.primary
-        )
-        Spacer(modifier = Modifier.height(24.dp))
-        Text(
-            text = "Quiz Master",
-            style = MaterialTheme.typography.displayLarge,
-            fontWeight = FontWeight.ExtraBold,
-            color = MaterialTheme.colorScheme.primary,
-            textAlign = TextAlign.Center
-        )
-        Spacer(modifier = Modifier.height(12.dp))
-        Text(
-            text = "Bilgini Test Et, Zirveye Ulaş!",
-            style = MaterialTheme.typography.titleLarge,
-            fontWeight = FontWeight.Medium,
-            color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.7f),
-            textAlign = TextAlign.Center
-        )
-        Spacer(modifier = Modifier.height(40.dp))
-        Button(
-            onClick = onStart,
+        Column(
             modifier = Modifier
-                .fillMaxWidth(0.7f)
-                .height(64.dp)
-                .scale(scale)
-                .clickable(
-                    onClick = {
-                        isPressed = true
-                        onStart()
-                        isPressed = false
-                    }
-                ),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = MaterialTheme.colorScheme.primary
-            ),
-            elevation = ButtonDefaults.buttonElevation(defaultElevation = 10.dp),
-            shape = MaterialTheme.shapes.medium
+                .align(Alignment.Center)
+                .padding(horizontal = 32.dp, vertical = 24.dp)
+                .background(
+                    color = Color.White.copy(alpha = 0.10f),
+                    shape = MaterialTheme.shapes.extraLarge
+                )
+                .padding(32.dp),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(
-                text = "Başla",
-                style = MaterialTheme.typography.headlineSmall,
-                fontSize = 22.sp,
-                color = MaterialTheme.colorScheme.onPrimary
+            Icon(
+                imageVector = Icons.Filled.Info,
+                contentDescription = "Quiz Icon",
+                modifier = Modifier.size(100.dp),
+                tint = Color(0xFF00C6FF)
             )
+            Spacer(modifier = Modifier.height(24.dp))
+            Text(
+                text = "Quiz Master",
+                style = MaterialTheme.typography.displayLarge.copy(fontWeight = FontWeight.ExtraBold),
+                color = Color(0xFF00C6FF),
+                textAlign = TextAlign.Center
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            Text(
+                text = "Bilgini Test Et, Zirveye Ulaş!",
+                style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Medium),
+                color = Color.White,
+                textAlign = TextAlign.Center
+            )
+            Spacer(modifier = Modifier.height(40.dp))
+            Button(
+                onClick = onStart,
+                modifier = Modifier
+                    .fillMaxWidth(0.7f)
+                    .height(56.dp)
+                    .scale(scale),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color(0xFF00C6FF)
+                ),
+                shape = MaterialTheme.shapes.extraLarge
+            ) {
+                Text(
+                    text = "Başla",
+                    style = MaterialTheme.typography.headlineSmall.copy(fontWeight = FontWeight.Bold),
+                    fontSize = 22.sp,
+                    color = Color.White
+                )
+            }
         }
     }
 }
