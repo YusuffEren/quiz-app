@@ -179,7 +179,7 @@ class QuizRepository(private val context: Context) {
                 },
                 {
                     "question": "Hangi Türk sporcu NBA'de oynamıştır?",
-                    "options": ["Hidayet Türkoğlu", "Arda Turan", "Hakan Şükür", "Rüştü Reçber"],
+                    "options": ["Hidayet Türkoğlu", "Arda Turan", "burak yılmaz", "Rüştü Reçber"],
                     "correctAnswer": 0
                 }
             ]
